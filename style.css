@@ -1,9 +1,17 @@
 :root {
     --bg-color: rgba(120, 99, 180, 0.8);
+    --text-color: white;
+    --shadow-color: rgba(255, 255, 255, 0.5);
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -21,14 +29,7 @@ img {
     object-fit: cover;
 }
 
-.time-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.clock {
+.clock-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -40,63 +41,76 @@ img {
     gap: 10px;
 }
 
+.clock-container div {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    background-color: var(--bg-color);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 20px 25px 20px;
+}
+
+.clock-container .time-value {
+    font-size: 1.5rem;
+}
+
+.clock-container .label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    font-weight: normal;
+    background-color: rgba(99, 6, 90, 0.2);
+    text-align: center;
+}
+
 .period-container {
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    padding-top: 10px;
 }
 
-#hours,
-#minutes,
-#seconds {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 4.5rem;
+.period-container div {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background-color: var(--bg-color);
-    padding: 10px;
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.label {
-    font-size: 1rem;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background-color: rgb(5, 6, 120);
-    padding: 10px;
-    display: block;
-    width: 100%;
+    color: var(--text-color);
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    background-color: rgba(32, 151, 21, 0.8);
+    border-radius: 5px;
     text-align: center;
-}
-
-#period {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background-color: rgba(7, 63, 13, 0.5);
-    margin-top: 30px;
+    overflow: hidden;
+    position: relative;
     padding: 10px;
-    border-radius: 10px;
 }
 
-@media screen and (min-width: 768px) {
+.clock-container,
+.period-container {
+    z-index: 1;
+}
+
+@media (min-width: 768px) {
     main {
-        font-size: 20px;
+        font-size: 24px;
+        flex-direction: row;
     }
 
-    .time-container {
-        flex-direction: row;
+    .clock-container {
+        gap: 20px;
+    }
+
+    .clock-container div {
+        padding: 20px 30px 35px 30px;
+    }
+
+    .period-container {
+        top: 50%;
+        left: 63%;
+        transform: translate(-50%, -50%);
     }
 }

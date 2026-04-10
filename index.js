@@ -1,26 +1,21 @@
 const hours = document.getElementById('hours');
+let hourValue = document.querySelector('.hourValue');
+const hourLabel = document.querySelector('.hourLabel');
 const minutes = document.getElementById('minutes');
+let minuteValue = document.querySelector('.minuteValue');
+const minuteLabel = document.querySelector('.minuteLabel');
 const seconds = document.getElementById('seconds');
+let secondValue = document.querySelector('.secondValue');
+const secondLabel = document.querySelector('.secondLabel');
 const period = document.getElementById('period');
 
-
 function updateClock() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-
-    const hourLabel = hours.querySelector('.label');
-    const minuteLabel = minutes.querySelector('.label');
-    const secondLabel = seconds.querySelector('.label');
-    
-    hours.innerHTML = hour.toString().padStart(2, '0') + ' ' + hourLabel.outerHTML;
-    minutes.innerHTML = minute.toString().padStart(2, '0') + ' ' + minuteLabel.outerHTML;
-    seconds.innerHTML = second.toString().padStart(2, '0') + ' ' + secondLabel.outerHTML;
-    
-    period.textContent = ampm;
+    const date = new Date();
+    hourValue.textContent = date.getHours().toString().padStart(2, '0');
+    minuteValue.textContent = date.getMinutes().toString().padStart(2, '0');
+    secondValue.textContent = date.getSeconds().toString().padStart(2, '0');
+    period.textContent = date.getHours() >= 12 ? 'PM' : 'AM';
 }
 
-setInterval(updateClock, 1000);
 updateClock();
+setInterval(updateClock, 1000);

@@ -86,6 +86,10 @@ main {
 }
 
 @media screen and (min-width: 768px) {
+
+    main {
+        position: relative;
+    }
     .clock-container {
         flex-direction: row;
         align-items: flex-end;
@@ -96,6 +100,8 @@ main {
         margin-top: 0;
         padding: 0;
         position: absolute;
-        transform: translateX(18vw) translateY(7.158vh);
+        top: 60.35vh;
+        right: 32vw;
+        /* transform: translateX(18vw) translateY(7.158vh); */
     }
 }

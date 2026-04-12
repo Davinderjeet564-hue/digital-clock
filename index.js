@@ -8,9 +8,13 @@ const seconds = document.getElementById('seconds');
 const secondValue = document.querySelector('.secondValue');
 const secondLabel = document.querySelector('.secondLabel');
 const period = document.getElementById('period');
-const datetime = document.querySelector('time');
 
 function updateClock() {
+    if (!hourValue || !minuteValue || !secondValue) {
+        console.error('Clock elements missing');
+        return;
+    }
+
     const date = new Date();
     const h = date.getHours();
     const m = date.getMinutes();
@@ -24,9 +28,11 @@ function updateClock() {
     secondValue.textContent = ss;
     period.textContent = h >= 12 ? 'PM' : 'AM';
 
-    hours.setAttribute('datetime', `${displayHours}:${mm}:${ss}`);
-    minutes.setAttribute('datetime', `${displayHours}:${mm}:${ss}`);
-    seconds.setAttribute('datetime', `${displayHours}:${mm}:${ss}`);
+    const timestring = date.toISOString();
+
+    hours.setAttribute('datetime', timestring);
+    minutes.setAttribute('datetime', timestring);
+    seconds.setAttribute('datetime', timestring);
 }
 
 updateClock();

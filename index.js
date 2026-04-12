@@ -1,3 +1,4 @@
+const timeElement = document.getElementById('clock');
 const hourValue = document.querySelector('.hourValue');
 const minuteValue = document.querySelector('.minuteValue');
 const secondValue = document.querySelector('.secondValue');
@@ -10,10 +11,13 @@ function updateClock() {
     const s = now.getSeconds();
     const ampmValue = h >= 12 ? 'PM' : 'AM';
     const hour12 = h % 12 || 12;
+    const timestring = now.toISOString()
     hourValue.textContent = hour12.toString().padStart(2, '0');
     minuteValue.textContent = m.toString().padStart(2, '0');
     secondValue.textContent = s.toString().padStart(2, '0');
     ampm.textContent = ampmValue;
+
+    timeElement.setAttribute('datetime', timestring);
 }
 
 updateClock();

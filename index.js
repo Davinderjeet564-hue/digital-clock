@@ -4,6 +4,14 @@ const minuteValue = document.querySelector('.minuteValue');
 const secondValue = document.querySelector('.secondValue');
 const ampm = document.querySelector('.ampm');
 
+function validateElements() {
+    if (!timeElement || !hourValue || !minuteValue || !secondValue || !ampm) {
+        console.error('Could not find clock elements');
+        return false;
+    }
+    return true;
+}
+
 function updateClock() {
     const now = new Date();
     const h = now.getHours();
@@ -11,14 +19,25 @@ function updateClock() {
     const s = now.getSeconds();
     const ampmValue = h >= 12 ? 'PM' : 'AM';
     const hour12 = h % 12 || 12;
-    const timestring = now.toISOString()
-    hourValue.textContent = hour12.toString().padStart(2, '0');
-    minuteValue.textContent = m.toString().padStart(2, '0');
-    secondValue.textContent = s.toString().padStart(2, '0');
+    const pad = (n)=>n.toString().padStart(2, '0');
+    const timestring = `${pad(h)}:${pad(m)}:${pad(s)}`;
+    hourValue.textContent = pad(hour12);
+    minuteValue.textContent = pad(m);
+    secondValue.textContent = pad(s);
     ampm.textContent = ampmValue;
 
     timeElement.setAttribute('datetime', timestring);
 }
 
+const isValid = validateElements()
+if (!isValid) {
+    console.error('Clock elements not found');
+    return;
+}
+
 updateClock();
-setInterval(updateClock, 1000);
+const intervalId = setInterval(updateClock, 1000);
+
+window.addEventListener('beforeunload', () => {
+    clearInterval(intervalId);
+});

@@ -29,15 +29,20 @@ function updateClock() {
     timeElement.setAttribute('datetime', timestring);
 }
 
-const isValid = validateElements()
-if (!isValid) {
-    console.error('Clock elements not found');
-    return;
+
+function init() {
+    const isValid = validateElements()
+    if (!isValid) {
+        console.error('Clock elements not found');
+        return;
+    }
+
+    updateClock();
+    const intervalId = setInterval(updateClock, 1000);
+
+    window.addEventListener('beforeunload', () => {
+        clearInterval(intervalId);
+    });
 }
 
-updateClock();
-const intervalId = setInterval(updateClock, 1000);
-
-window.addEventListener('beforeunload', () => {
-    clearInterval(intervalId);
-});
+init();

@@ -31,11 +31,8 @@ function updateClock() {
 
 
 function init() {
-    const isValid = validateElements()
-    if (!isValid) {
-        console.error('Clock elements not found');
-        return;
-    }
+    const isValid = validateElements();
+    if (!isValid) return;
 
     updateClock();
     const intervalId = setInterval(updateClock, 1000);
